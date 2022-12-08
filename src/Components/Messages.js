@@ -273,11 +273,9 @@ function Messages({ values, msgId }) {
               console.log("doc not found");
               return;
             }
-
             let newLikeCount = doc.data().likeCount - 1;
             let newLikes = doc.data().likes ? doc.data().likes : {};
             newLikes[uid] = false;
-
             transaction.update(messageDoc, {
               likeCount: newLikeCount,
               likes: newLikes,
@@ -299,11 +297,9 @@ function Messages({ values, msgId }) {
               console.log("doc not found");
               return;
             }
-
             let newLikeCount = doc.data().likeCount + 1;
             let newLikes = doc.data().likes ? doc.data().likes : {};
             newLikes[uid] = true;
-
             transaction.update(messageDoc, {
               likeCount: newLikeCount,
               likes: newLikes,
@@ -397,7 +393,6 @@ function Messages({ values, msgId }) {
                 </IconButton>
               </div>
             ) : null}
-
             {numFire > 0 ? (
               <div style={{ padding: "3px" }}>
                 <IconButton

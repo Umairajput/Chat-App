@@ -18,6 +18,7 @@ import CreateRoom from "./CreateRoom";
 import Fade from "@material-ui/core/Fade";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -92,7 +93,6 @@ function Rooms() {
         });
     }
   };
-
   return (
     <div>
       <Snackbar
@@ -108,7 +108,6 @@ function Rooms() {
           </IconButton>
         }
       />
-
       {showCreateRoom ? (
         <CreateRoom create={addChannel} manage={manageCreateRoomModal} />
       ) : null}
@@ -151,7 +150,6 @@ function Rooms() {
                     channel.channelName === channel.channelName.substr(0, 12)
                       ? channel.channelName
                       : `${channel.channelName.substr(0, 12)}...`
-                      
                   }
                   style={{ color: "#dcddde" }}
                 />
