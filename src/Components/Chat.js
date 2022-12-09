@@ -97,7 +97,6 @@ function Chat() {
     e.preventDefault();
     if (userNewMsg && params.id) {
       const userData = JSON.parse(localStorage.getItem("userDetails"));
-
       if (userData) {
         const displayName = userData.displayName;
         const imgUrl = userData.photoURL;
@@ -123,7 +122,6 @@ function Chat() {
           heart: heart,
           postImg: postImg,
         };
-
         db.collection("channels")
           .doc(params.id)
           .collection("messages")
@@ -157,7 +155,53 @@ function Chat() {
     }
     e.target.value = null;
   };
+  window.onkeydown = function (event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      if (userNewMsg && params.id) {
+        const userData = JSON.parse(localStorage.getItem("userDetails"));
+        if (userData) {
+          const displayName = userData.displayName;
+          const imgUrl = userData.photoURL;
+          const uid = userData.uid;
+          const likeCount = 0;
+          const likes = {};
+          const fireCount = 0;
+          const fire = {};
+          const heartCount = 0;
+          const heart = {};
+          const postImg = null;
+          const obj = {
+            text: userNewMsg,
+            timestamp: firebase.firestore.Timestamp.now(),
+            userImg: imgUrl,
+            userName: displayName,
+            uid: uid,
+            likeCount: likeCount,
+            likes: likes,
+            fireCount: fireCount,
+            fire: fire,
+            heartCount: heartCount,
+            heart: heart,
+            postImg: postImg,
+          };
+          db.collection("channels")
+            .doc(params.id)
+            .collection("messages")
+            .add(obj)
+            .then((res) => {
+              console.log("message sent");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
 
+        setUserNewMsg("");
+        setEmojiBtn(false);
+      }
+    }
+  }
   return (
     <div className={classes.root}>
       {modalState ? <FileUpload setState={openModal} file={file} /> : null}

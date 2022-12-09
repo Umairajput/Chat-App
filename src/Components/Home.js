@@ -73,7 +73,6 @@ function Home() {
         );
       });
   }, []);
-
   const goToChannel = (id) => {
     history.push(`/channel/${id}`);
   };
