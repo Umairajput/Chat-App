@@ -104,22 +104,29 @@ function Messages({ values, msgId }) {
   const day = date.getDate();
   const year = date.getFullYear();
   const month = date.getMonth();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-  const time = `${day}/${month}/${year}   ${hour}:${minute}`;
-
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  if (hour > 12) {
+    hour = "0" + (hour - 12)
+  } if (second < 10) {
+    second = "0" + (second)
+  }
+  if (hour < 10) {
+    minute = "0" + (minute)
+  }
+  else {
+    hour = hour
+  }
+  const time = `${day}/${month}/${year}   ${hour}:${minute}:${second}`;
   const numLikes = values.likeCount;
   const numFire = values.fireCount;
   const numHeart = values.heartCount;
-
   const userLiked = values.likes[uid];
   const userFire = values.fire[uid];
   const userHeart = values.heart[uid];
-
   const postImg = values.postImg;
-
   const channelId = useParams().id;
-
   const selectedLike = userLiked
     ? { color: "#8ff879", backgroundColor: "#545454" }
     : null;
